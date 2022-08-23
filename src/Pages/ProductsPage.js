@@ -1,8 +1,4 @@
 import * as data from "../data";
-import { Link, NavLink } from "react-router-dom";
-import checkCart from "../Utils/CheckCart";
-import { toast } from "react-toastify";
-import { useCart, useCartActions } from "../Context/CartProvider";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import { AiOutlineClose } from "react-icons/ai";
@@ -15,16 +11,7 @@ const ProductsPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const { cart } = useCart();
-
-  const dispatch = useCartActions();
-
   const [sortBar, setSortBar] = useState(false);
-
-  const addProductHandler = (product) => {
-    dispatch({ type: "ADD_TO_CART", payload: product });
-    toast.success(`${product.name} added to cart!`);
-  };
 
   const options = [
     { value: "new", label: "Newest" },
