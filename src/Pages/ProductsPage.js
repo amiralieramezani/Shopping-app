@@ -8,6 +8,7 @@ import Select from "react-select";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaSortAmountDown } from "react-icons/fa";
 import { BsCheckLg } from "react-icons/bs";
+import Product from "../Components/Common/Product";
 
 const ProductsPage = () => {
   useEffect(() => {
@@ -135,54 +136,11 @@ const ProductsPage = () => {
           )}
         </div>
       </div>
+
       <div className="grid sm:grid-cols-4 sm:gap-4 grid-cols-2 gap-2 mt-12">
         {sortWithSwitch(sort).map((product) => (
-          <div
-            key={product.id}
-            className="dark:bg-slate-800 bg-white dark:text-white text-slate-900 flex flex-col justify-between rounded-lg py-6 px-4 snap-start"
-          >
-            <Link to={{ pathname: `/products/${product.id}` }}>
-              <div className=" mb-2 sm:mb-5">
-                <img src={product.image} alt={product.name} />
-              </div>
-              <div className="sm:text-sm  mb-2 sm:mb-5 text-xs w-full">
-                <p className=" truncate">{product.name}</p>
-              </div>
-              <div className="flex mb-2 sm:mb-5 flex-col justify-between">
-                <div className="flex flex-row justify-between">
-                  <p className=" font-bold">${product.offPrice}</p>
-                  {product.discount > 0 && (
-                    <p className="bg-sky-500 italic dark:text-black text-white rounded-full p-0.5 text-sm font-bold">
-                      {Math.ceil((product.discount / product.price) * 100)}%
-                    </p>
-                  )}
-                </div>
-                <div className="flex flex-row">
-                  <p className="dark:text-slate-300 text-slate-500 line-through">
-                    {product.discount > 0 && `$${product.price}`}
-                  </p>
-                  <p>&nbsp;</p>
-                </div>
-              </div>
-            </Link>
-
-            <div className="flex flex-col items-center">
-              {checkCart(cart, product) ? (
-                <NavLink
-                  className="dark:bg-slate-200 bg-sky-500 text-white rounded-md px-4 py-2 dark:text-slate-900"
-                  to="/cart"
-                >
-                  In cart!
-                </NavLink>
-              ) : (
-                <button
-                  onClick={() => addProductHandler(product)}
-                  className="dark:bg-slate-200 bg-sky-500 text-white rounded-md px-4 py-2 dark:text-slate-900"
-                >
-                  Add to cart
-                </button>
-              )}
-            </div>
+          <div className="dark:bg-slate-800 bg-white dark:text-white text-slate-900 flex flex-col justify-between rounded-lg py-6 px-4 snap-start">
+            <Product key={product.id} product={product} />{" "}
           </div>
         ))}
       </div>
